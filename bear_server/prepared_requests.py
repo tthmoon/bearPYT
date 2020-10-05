@@ -1,5 +1,5 @@
-import server_settings
-from end_points import *
+from bear_server import server_settings
+from bear_server.end_points import *
 
 from requests import Request
 

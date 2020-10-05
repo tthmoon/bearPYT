@@ -1,5 +1,5 @@
 class Server:
-	ADDRESS = "192.168.99.100"
+	ADDRESS = "localhost"
 	PORT = 8091
 
 
