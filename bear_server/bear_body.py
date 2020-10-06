@@ -1,7 +1,7 @@
 import collections
 import json
 
-
+# Класс хранящий информацию по телу медведя
 class BearBody(collections.OrderedDict):
 
 	class BearTypes:
@@ -14,7 +14,7 @@ class BearBody(collections.OrderedDict):
 		BEAR_TYPE = "bear_type"
 		BEAR_NAME = "bear_name"
 		BEAR_AGE = "bear_age"
-
+	# Метод для создание тела медведя в формате строки
 	@staticmethod
 	def create_bear_body(b_type, b_name, b_age, *args, **kwargs):
 		config = BearBody()

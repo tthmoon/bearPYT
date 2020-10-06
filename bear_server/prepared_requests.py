@@ -3,7 +3,7 @@ from bear_server.end_points import *
 
 from requests import Request
 
-
+# Класс с подготовленными запросами к API, методы возвращают подготовленный запрос
 class PreparedRequests:
 	address = server_settings.Server.ADDRESS
 	port = server_settings.Server.PORT
