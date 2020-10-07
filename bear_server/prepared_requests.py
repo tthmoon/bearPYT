@@ -1,9 +1,10 @@
 from bear_server import server_settings
 from bear_server.end_points import *
 
-from requests import Request
+import requests
 
-# Класс с подготовленными запросами к API, методы возвращают подготовленный запрос
+
+# Класс с подготовленными запросами к API, методы возвращают ответы на запросы
 class PreparedRequests:
 	address = server_settings.Server.ADDRESS
 	port = server_settings.Server.PORT
@@ -14,44 +15,44 @@ class PreparedRequests:
 
 		final_url = self.createURL() + EndPoints.BEAR
 
-		req = Request('POST', url=final_url, data=bear_body, headers=self.headers)
+		response = requests.post(url=final_url, data=bear_body, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def getAllBears(self):
-		final_url =self.createURL() + EndPoints.BEAR
+		final_url = self.createURL() + EndPoints.BEAR
 
-		req = Request('GET', url=final_url, headers=self.headers)
+		response = requests.get(url=final_url, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def getSpecificBear(self, idb):
 		final_url = self.createURL() + EndPoints.BEAR_SE.format(idb)
 
-		req = Request('GET', url=final_url, headers=self.headers)
+		response = requests.get(url=final_url, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def updateSpecificBear(self, idb, bear_body):
 		final_url = self.createURL() + EndPoints.BEAR_SE.format(idb)
 
-		req = Request('PUT', url=final_url, data=bear_body, headers=self.headers)
+		response = requests.put(url=final_url, data=bear_body, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def deleteSpecificBear(self, idb):
 		final_url = self.createURL() + EndPoints.BEAR_SE.format(idb)
 
-		req = Request('DELETE', url=final_url, headers=self.headers)
+		response = requests.delete(url=final_url, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def deleteAllBear(self):
 		final_url = self.createURL() + EndPoints.BEAR
 
-		req = Request('DELETE', url=final_url, headers=self.headers)
+		response = requests.delete(url=final_url, headers=self.headers)
 
-		return req.prepare()
+		return response
 
 	def createURL(self):
 		return "http://{}:{}".format(self.address, str(self.port))

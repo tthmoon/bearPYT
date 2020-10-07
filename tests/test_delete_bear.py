@@ -11,9 +11,9 @@ from bear_server.bear_body import BearBody
 def prepare_and_create_bear():
     b_body = BearBody.create_bear_body(BearBody.BearTypes.POLAR, "test", 15.2)
 
-    request = PreparedRequests().createBear(b_body)
-    response_post = Session().send(request)
-    assert response_post.status_code == 200
+    response_post = PreparedRequests().createBear(b_body)
+
+    assert response_post.status_code == 200, "Response status code does not match expected"
 
     bear_id = int(response_post.text)
 
@@ -22,26 +22,26 @@ def prepare_and_create_bear():
 # Тест на удаление определенного медведя
 def test_delete_specific_bear(prepare_and_create_bear):
     # Запрос на удаление медведя
-    request = PreparedRequests().deleteSpecificBear(prepare_and_create_bear)
-    response_delete = Session().send(request)
-    assert response_delete.status_code == 200
-    assert response_delete.text == "OK"
+    response_delete = PreparedRequests().deleteSpecificBear(prepare_and_create_bear)
+
+    assert response_delete.status_code == 200, "Response status code does not match expected"
+    assert response_delete.text == "OK", "Response text does not match expected"
     # Запрос за получение медведя
-    request = PreparedRequests().getSpecificBear(prepare_and_create_bear)
-    response_get = Session().send(request)
-    assert response_get.status_code == 200
-    assert response_get.text == "EMPTY"
+    response_get = PreparedRequests().getSpecificBear(prepare_and_create_bear)
+
+    assert response_get.status_code == 200, "Response status code does not match expected"
+    assert response_get.text == "EMPTY", "Response text does not match expected"
 
 # Тест на удаление всех медведей
 def test_delete_all_bear(prepare_and_create_bear):
     # Запроса на удаление всех медведей
-    request = PreparedRequests().deleteAllBear()
-    response_delete = Session().send(request)
-    assert response_delete.status_code == 200
-    assert response_delete.text == "OK"
+    response_delete = PreparedRequests().deleteAllBear()
+
+    assert response_delete.status_code == 200, "Response status code does not match expected"
+    assert response_delete.text == "OK", "Response text does not match expected"
     # Запрос на получение всех медведей
-    request = PreparedRequests().getAllBears()
-    response_get = Session().send(request)
+    response_get = PreparedRequests().getAllBears()
+
     bears = json.loads(response_get.text)
     # Проверка, что список медведй пустой
-    assert len(bears) == 0
+    assert len(bears) == 0, "Stored on server bears number not equal 0"
